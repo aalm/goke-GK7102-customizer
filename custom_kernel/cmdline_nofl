@@ -1,0 +1,1 @@
+console=ttySGK0,115200 mem=40M root=/dev/mmcblk0p2 rw

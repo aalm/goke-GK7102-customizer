@@ -1,0 +1,1 @@
+console=ttySGK0,115200 mem=40M root=/dev/mmcblk0p2 rw mtdparts=gk_flash:320K(U),1664K(K),896K(R),5312K(A)

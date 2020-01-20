@@ -1,0 +1,19 @@
+# rnd notes for testing kexec:
+
+# cat /proc/cmdline to check if your "mtdparts=" does match _wmtd
+# if using kernel w/mtd(flash) support built in
+
+# preparing sd card:
+dd if=/dev/zero of=/dev/mmcblk0 bs=1M count=16
+fdisk /dev/mmcblk0
+# type 'o' to clear the partition table
+# type 'n' for new partition,
+#	'p' primary, '1' first,
+#	default starting sector, +256M ending sector
+# type 't' to set the type to 'c' fat
+# type 'n', 'p' primary, '2' second, choose defaults for sectors
+# type 'w' - done
+mkfs.vfat /dev/mmcblk0p1
+# mount the above filesystem, and fill w/this repo
+mkfs.ext4 -O ^has_journal /dev/mmcblk0p2
+# mount&fill the above fs w/files from the old rootfs&/home(the .img's)
